@@ -1,2 +1,5 @@
 # Directories
 grove_examples/
+
+# Executables and similar
+*.pyc
