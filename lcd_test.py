@@ -12,7 +12,64 @@
 
 from lcd import *
 import time
+ 
+r = 1
+g = 1
+b = 1
 
 lcd_init()
-lcd_set_rgb(0, 0, 255)
-lcd_write_string("Hello World \n :) :) ;)")
+lcd_write_string("abcdefghijklmnopqrstuvwxyz1234567890")
+lcd_set_rgb(r, g, b)
+time.sleep(5) 
+lcd_clear()
+lcd_write_string(":) :) ;) \nHello World")
+lcd_set_rgb(r, g, b)
+lcd_return_home()
+lcd_write_string(":P")
+lcd_set_cursor(0, 9)
+lcd_write_string(":D")
+time.sleep(0.002) 
+while 1 == 1:
+   #red
+   while (r < 255):
+      r += 1
+      lcd_set_rgb(r, g, b)
+      time.sleep(0.002) 
+   #yellow
+   while (g < 255):
+      g += 1
+      lcd_set_rgb(r, g, b)
+      time.sleep(0.002) 
+   #green
+   while (r > 1):
+      r -= 1
+      lcd_set_rgb(r, g, b)
+      time.sleep(0.002) 
+   #cyan
+   while (b < 255):
+      b += 1
+      lcd_set_rgb(r, g, b)
+      time.sleep(0.002) 
+   #blue
+   while (g > 1):
+      g -= 1
+      lcd_set_rgb(r, g, b)
+      time.sleep(0.002) 
+   #purple
+   while (r < 255):
+      r += 1
+      lcd_set_rgb(r, g, b)
+      time.sleep(0.002) 
+   #white
+   while (g < 255):
+      g += 1
+      lcd_set_rgb(r, g, b)
+      time.sleep(0.002) 
+   #black
+   while ( (r > 1) and (g > 1) and (b > 1) ):
+      r -= 1
+      b -= 1
+      g -= 1
+      lcd_set_rgb(r, g, b)
+      time.sleep(0.002) 
+      

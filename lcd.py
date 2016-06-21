@@ -61,6 +61,7 @@ def lcd_set_rgb(r, g, b):
 def lcd_clear():
    lcd_write_cmd(0x01)
    time.sleep(0.002)
+   lcd_return_home()
 
 def lcd_return_home():
    lcd_write_cmd(0x02)
