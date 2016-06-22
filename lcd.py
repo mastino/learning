@@ -9,6 +9,10 @@
 #    but be warned I have no idea what I'm doing so you should look elsewhere.
 #    If by some miracle you find this useful, I accept thanks in the form of 
 #    chocolate and introductions to potential employers.
+#
+# The following were heavily referenced and both use the MIT license:
+# https://github.com/DexterInd/GrovePi/tree/master/Software/Python/grove_rgb_lcd
+# https://github.com/Seeed-Studio/Grove_LCD_RGB_Backlight
 
 # imports
 import smbus
@@ -25,7 +29,6 @@ RGB_ADDR = (0xc4>>1) # i2c addr for rgb backlight
 # RGB_ADDR = 0x62   
 
 def lcd_init():
-  # Initialise display
   time.sleep(0.05)      # wait after power on
   lcd_write_cmd(0x3C)   # 2 lines (bit 3) display on (bit 2)
   time.sleep(0.001)     # 
@@ -36,6 +39,8 @@ def lcd_init():
   lcd_write_cmd(0x06)   # increment (bit 1) entire shift (bit 0)
   time.sleep(0.002)     # 
 
+#TODO figure out what heppens and what to do if string doesnt start at home
+#     and overruns the end
 def lcd_write_string(str):
    num = len(str)
    if(num > 32):
@@ -75,6 +80,8 @@ def lcd_set_cursor(row, col):
       lcd_write_cmd(col | 0x80)
    else:
       lcd_write_cmd(col | 0xc0)
+
+#### low(ish) level functions ####
 
 def lcd_write_cmd(cmd):
    bus.write_byte_data(LCD_ADDR, 0x80, cmd)
