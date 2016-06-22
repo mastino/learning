@@ -18,6 +18,9 @@ import time
 bus = smbus.SMBus(1) # i2c bus
 LCD_ADDR = (0x7c>>1) # i2c address for lcd shifted to add R/W bit in smbus func
 RGB_ADDR = (0xc4>>1) # i2c addr for rgb backlight
+# These addresses are always the same it seems, even if we plug in more than one
+#   This is a wierd thing I dont know if it is a rasp pi thing or an i2c thing 
+#   or what hopefully I'll find out and let yinz know. 
 # LCD_ADDR = 0x3E        #alternatively
 # RGB_ADDR = 0x62   
 
