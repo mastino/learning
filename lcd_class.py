@@ -34,20 +34,20 @@ class GroveLCD:
   display_state = 0x0E # display on cursor on blink off
   shift_state   = 0x10 # don't shift text
 
-  def __init___():
+  def __init__(self):
     time.sleep(0.05)      # wait after power on
-    lcd_write_cmd(0x3C)   # 2 lines (bit 3) display on (bit 2)
+    self.lcd_write_cmd(0x3C)   # 2 lines (bit 3) display on (bit 2)
     time.sleep(0.001)     # 
-    lcd_write_cmd(0x0E)   # cursor on (bit 1) blink off (bit 0)
+    self.lcd_write_cmd(0x0E)   # cursor on (bit 1) blink off (bit 0)
     time.sleep(0.001)     # 
-    lcd_write_cmd(0x01)   # clear display
+    self.lcd_write_cmd(0x01)   # clear display
     time.sleep(0.001)     # 
-    lcd_write_cmd(0x06)   # increment (bit 1) entire shift (bit 0)
+    self.lcd_write_cmd(0x06)   # increment (bit 1) entire shift (bit 0)
     time.sleep(0.002)     # 
 
   #TODO figure out what heppens and what to do if string doesnt start at home
   #     and overruns the end
-  def write_string(str):
+  def write_string(self, str):
      num = len(str)
      if(num > 32):
         num = 32
@@ -55,94 +55,95 @@ class GroveLCD:
      row = 0
      while( (i < num) and (row < 2) ):
         if(str[i] == "\n") :
-           set_cursor(1, 0)
+           self.move_cursor(1, 0)
            row += 1    
         else:
            if( (i == 16) and (row == 0) ):
-              set_cursor(1, 0)
+              self.move_cursor(1, 0)
               row += 1
-           lcd_write_data(ord(str[i]))
+           self.lcd_write_data(ord(str[i]))
         i += 1
 
-  def set_rgb(r, g, b):
-     lcd_write_reg(0x00, 0x00)
-     lcd_write_reg(0x01, 0x00)
-     lcd_write_reg(0x08, 0xaa)   # set up whatever
-     lcd_write_reg(0x04, r)      # red
-     lcd_write_reg(0x03, g)      # green
-     lcd_write_reg(0x02, b)      # ocre (jk blue)
+  def set_rgb(self, r, g, b):
+     self.lcd_write_reg(0x00, 0x00)
+     self.lcd_write_reg(0x01, 0x00)
+     self.lcd_write_reg(0x08, 0xaa)   # set up whatever
+     self.lcd_write_reg(0x04, r)      # red
+     self.lcd_write_reg(0x03, g)      # green
+     self.lcd_write_reg(0x02, b)      # ocre (jk blue)
 
-  def clear():
-     lcd_write_cmd(0x01)
+  def clear(self):
+     self.lcd_write_cmd(0x01)
      time.sleep(0.002)
-     return_home()
+     self.return_home()
 
-  def return_home():
-     lcd_write_cmd(0x02)
+  def return_home(self):
+     self.lcd_write_cmd(0x02)
      time.sleep(0.002)
 
-  def set_cursor(row, col):
+  def move_cursor(self, row, col):
      if(row == 0):
-        lcd_write_cmd(col | 0x80)
+        self.lcd_write_cmd(col | 0x80)
      else:
-        lcd_write_cmd(col | 0xc0)
+        self.lcd_write_cmd(col | 0xc0)
 
   #### functions for setting various states for the display ####
   # note all inputs should be bools
 
-  def set_display(on):
+  def set_display(self, on):
     if on:
-      display_state |= 0x04
+      self.display_state |= 0x04
     else:
-      display_state &= (~0x04)
-    lcd_write_cmd(display_state)
+      self.display_state &= (~0x04)
+    self.lcd_write_cmd(self.display_state)
 
-  def set_cursor(on):
+  def set_cursor(self, on):
     if on:
-      display_state |= 0x02
+      self.display_state |= 0x02
     else:
-      display_state &= (~0x02)
-    lcd_write_cmd(display_state)
+      self.display_state &= (~0x02)
+    self.lcd_write_cmd(self.display_state)
 
-  def set_blink(on):
+  # makes the cursor blink
+  def set_blink(self, on):
     if on:
-      display_state |= 0x01
+      self.display_state |= 0x01
     else:
-      display_state &= (~0x01)
-    lcd_write_cmd(display_state)
+      self.display_state &= (~0x01)
+    self.lcd_write_cmd(self.display_state)
 
-  def set_shift_cursor(on, inc):
+  def set_shift_cursor(self, on, inc):
     if on:
-      input_state |= 0x01
+      self.input_state |= 0x01
     else:
-      input_state &= (~0x01)
+      self.input_state &= (~0x01)
     if inc:
-      input_state |= 0x02
+      self.input_state |= 0x02
     else:
-      input_state &= (~0x02)
-    lcd_write_cmd(input_state)
+      self.input_state &= (~0x02)
+    self.lcd_write_cmd(self.input_state)
 
   # note: shifting display stops text shifting
-  def set_shift_display(on, right):
+  def set_shift_display(self, on, right):
     if on:
-      shift_state |= 0x08
+      self.shift_state |= 0x08
     else:
-      shift_state &= (~0x08)
+      self.shift_state &= (~0x08)
     if right:
-      shift_state |= 0x04
+      self.shift_state |= 0x04
     else:
-      shift_state &= (~0x04)
-    lcd_write_cmd(shift_state)
+      self.shift_state &= (~0x04)
+    self.lcd_write_cmd(self.shift_state)
 
   #### low(ish) level functions ####
 
-  def lcd_write_cmd(cmd):
-     bus.write_byte_data(LCD_ADDR, 0x80, cmd)
+  def lcd_write_cmd(self, cmd):
+     self.bus.write_byte_data(self.LCD_ADDR, 0x80, cmd)
 
-  def lcd_write_data(data):
+  def lcd_write_data(self, data):
      # bus.write_byte(LCD_ADDR, 0x40)
      # bus.write_byte(LCD_ADDR, data)
-     bus.write_byte_data(LCD_ADDR, 0x40, data)
+     self.bus.write_byte_data(self.LCD_ADDR, 0x40, data)
 
-  def lcd_write_reg(reg, data):
-     bus.write_byte_data(RGB_ADDR, reg, data)
+  def lcd_write_reg(self, reg, data):
+     self.bus.write_byte_data(self.RGB_ADDR, reg, data)
