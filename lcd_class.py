@@ -112,8 +112,11 @@ class GroveLCD:
       self.display_state &= (~0x01)
     self.lcd_write_cmd(self.display_state)
 
-  def set_shift_cursor(self, on, inc):
-    if on:
+  # note: text chooses shift text (true) or cursor
+  #       inc does left or right; shifting text keeps the cursor in place
+  #           and moves the text. moving text right doesn't work well
+  def set_shift_cursor(self, text, inc):
+    if text:
       self.input_state |= 0x01
     else:
       self.input_state &= (~0x01)

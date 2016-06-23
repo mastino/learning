@@ -6,6 +6,8 @@ random stuff so I can learn about python and raspberry pi
    * lcd_test.py         - a driver program for testing the lcd functions
    * ultra_sonic_dist.py - a set of functions for the HC-SR04 ultra sound distance sensor 
 
+
+
 ## LCD and I2C
 ### Things To Do
    * test class
@@ -20,6 +22,8 @@ random stuff so I can learn about python and raspberry pi
    * http://www.raspberry-projects.com/pi/programming-in-python/i2c-programming-in-python/using-the-i2c-interface-2
    * https://github.com/Seeed-Studio/Grove_LCD_RGB_Backlight
    * https://github.com/DexterInd/GrovePi/tree/master/Software/Python/grove_rgb_lcd
+
+
 
 ## Sound detector
 ### Useful sources

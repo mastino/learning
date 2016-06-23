@@ -41,6 +41,39 @@ lcd.set_blink(True)
 time.sleep(5) 
 lcd.set_blink(False)
 
+lcd.clear()
+lcd.set_shift_cursor(False, False)
+lcd.move_cursor(0, 10)
+lcd.write_string("dlroW")
+lcd.return_home()
+lcd.set_shift_cursor(False, True)
+lcd.write_string("Hello ")
+time.sleep(5) 
+
+
+lcd.clear()
+lcd.move_cursor(1, 8)
+lcd.write_string(";)")
+lcd.move_cursor(0, 15)
+lcd.set_shift_cursor(True, True)
+str1 = "yo yo what up?"
+for c in str1:
+   lcd.write_string(c)   
+   time.sleep(1)
+time.sleep(3) 
+
+lcd.clear()
+lcd.move_cursor(0, 0)
+lcd.set_shift_cursor(True, False)
+str2 = "?u hcum ton ,edud"
+# str2 = "dude, not much u?"
+for c in str2:
+   lcd.write_string(c)
+   time.sleep(1)
+time.sleep(3) 
+
+lcd.set_shift_cursor(False, True)
+
 # lcd.set_shift_display(True, True)
 # # for x in xrange(1,10):
 # #    lcd.return_home()
@@ -49,15 +82,17 @@ lcd.set_blink(False)
 # lcd.return_home()
 # lcd.write_string("abcdefghijklmnopqrstuvwxyz1234567890")
 # time.sleep(5) 
+
 # lcd.set_shift_display(False, True)
 
-# lcd.clear()
-# lcd.write_string(":) :) ;) \nHello World")
-# lcd.set_rgb(r, g, b)
-# lcd.return_home()
-# lcd.write_string(":P")
-# lcd.move_cursor(0, 9)
-# lcd.write_string(":D")
+lcd.clear()
+lcd.return_home()
+lcd.write_string(":) :) ;) \nHello World")
+lcd.set_rgb(r, g, b)
+lcd.return_home()
+lcd.write_string(":P")
+lcd.move_cursor(0, 9)
+lcd.write_string(":D")
 
 while 1 == 1:
    #red
