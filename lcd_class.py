@@ -30,20 +30,25 @@ class GroveLCD:
   # LCD_ADDR = 0x3E        #alternatively
   # RGB_ADDR = 0x62   
 
-  input_state   = 0x07 # increment cursor with each letter
-  display_state = 0x0E # display on cursor on blink off
-  shift_state   = 0x10 # don't shift text
+  # in a real language I would make these constant
+  default_display_state = 0x0E # display on, cursor on, blink off
+  default_input_state   = 0x06 # increment cursor (don't move text)
+  default_shift         = 0x10 # for one time shifts of text or cursor
+
+  input_state   = default_input_state  
+  display_state = default_display_state
 
   def __init__(self):
-    time.sleep(0.05)      # wait after power on
+    time.sleep(0.05)           # wait after power on
     self.lcd_write_cmd(0x3C)   # 2 lines (bit 3) display on (bit 2)
-    time.sleep(0.001)     # 
+    time.sleep(0.001)          # 
     self.lcd_write_cmd(0x0E)   # cursor on (bit 1) blink off (bit 0)
-    time.sleep(0.001)     # 
+    time.sleep(0.001)          # 
     self.lcd_write_cmd(0x01)   # clear display
-    time.sleep(0.001)     # 
+    time.sleep(0.001)          # 
     self.lcd_write_cmd(0x06)   # increment (bit 1) entire shift (bit 0)
-    time.sleep(0.002)     # 
+    time.sleep(0.002)          # 
+    self.set_default_states()
 
   #TODO figure out what heppens and what to do if string doesnt start at home
   #     and overruns the end
@@ -72,10 +77,11 @@ class GroveLCD:
      self.lcd_write_reg(0x03, g)      # green
      self.lcd_write_reg(0x02, b)      # ocre (jk blue)
 
+  # note: sets text shift control to inc
   def clear(self):
      self.lcd_write_cmd(0x01)
      time.sleep(0.002)
-     self.return_home()
+     self.return_home() # this may be redundant
 
   def return_home(self):
      self.lcd_write_cmd(0x02)
@@ -89,6 +95,13 @@ class GroveLCD:
 
   #### functions for setting various states for the display ####
   # note all inputs should be bools
+
+  def set_default_states(self):
+    self.lcd_write_cmd(self.default_display_state)
+    self.lcd_write_cmd(self.default_input_state)
+    self.input_state   = self.default_input_state  
+    self.display_state = self.default_display_state
+
 
   def set_display(self, on):
     if on:
@@ -115,7 +128,7 @@ class GroveLCD:
   # note: text chooses shift text (true) or cursor
   #       inc does left or right; shifting text keeps the cursor in place
   #           and moves the text. moving text right doesn't work well
-  def set_shift_cursor(self, text, inc):
+  def set_shift_text(self, text, inc):
     if text:
       self.input_state |= 0x01
     else:
@@ -126,17 +139,18 @@ class GroveLCD:
       self.input_state &= (~0x02)
     self.lcd_write_cmd(self.input_state)
 
-  # note: shifting display stops text shifting
-  def set_shift_display(self, on, right):
-    if on:
-      self.shift_state |= 0x08
+  # note: does a one time shift text (T) / cursor (F), Right (T) / left (F)
+  def shift_text(self, text, right):
+    shift = self.default_shift
+    if text:
+      shift |= 0x08
     else:
-      self.shift_state &= (~0x08)
+      shift &= (~0x08)
     if right:
-      self.shift_state |= 0x04
+      shift |= 0x04
     else:
-      self.shift_state &= (~0x04)
-    self.lcd_write_cmd(self.shift_state)
+      shift &= (~0x04)
+    self.lcd_write_cmd(shift)
 
   #### low(ish) level functions ####
 

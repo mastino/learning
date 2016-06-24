@@ -10,9 +10,8 @@ random stuff so I can learn about python and raspberry pi
 
 ## LCD and I2C
 ### Things To Do
-   * test class
-   * understand shifting functions of the lcd
    * resolve writing running off the screen (maybe counter in the class)
+   * add more color functions?
 
 ### Useful sources
    * DATA SHEET: http://www.seeedstudio.com/wiki/images/0/03/JHD1214Y_YG_1.0.pdf

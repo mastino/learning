@@ -22,6 +22,12 @@ lcd.write_string("abcdefghijklmnopqrstuvwxyz1234567890")
 lcd.set_rgb(r, g, b)
 time.sleep(5) 
 lcd.clear()
+
+lcd.move_cursor(0, 5)
+lcd.write_string("abcdefghijklmnopqrstuvwxyz1234567890")
+time.sleep(5) 
+lcd.clear()
+
 lcd.write_string(":) :) ;) \nHello World")
 lcd.set_rgb(r, g, b)
 lcd.return_home()
@@ -42,11 +48,11 @@ time.sleep(5)
 lcd.set_blink(False)
 
 lcd.clear()
-lcd.set_shift_cursor(False, False)
+lcd.set_shift_text(False, False)
 lcd.move_cursor(0, 10)
 lcd.write_string("dlroW")
 lcd.return_home()
-lcd.set_shift_cursor(False, True)
+lcd.set_shift_text(False, True)
 lcd.write_string("Hello ")
 time.sleep(5) 
 
@@ -55,7 +61,7 @@ lcd.clear()
 lcd.move_cursor(1, 8)
 lcd.write_string(";)")
 lcd.move_cursor(0, 15)
-lcd.set_shift_cursor(True, True)
+lcd.set_shift_text(True, True)
 str1 = "yo yo what up?"
 for c in str1:
    lcd.write_string(c)   
@@ -64,7 +70,7 @@ time.sleep(3)
 
 lcd.clear()
 lcd.move_cursor(0, 0)
-lcd.set_shift_cursor(True, False)
+lcd.set_shift_text(True, False)
 str2 = "?u hcum ton ,edud"
 # str2 = "dude, not much u?"
 for c in str2:
@@ -72,18 +78,29 @@ for c in str2:
    time.sleep(1)
 time.sleep(3) 
 
-lcd.set_shift_cursor(False, True)
+lcd.set_shift_text(False, False)
 
-# lcd.set_shift_display(True, True)
-# # for x in xrange(1,10):
-# #    lcd.return_home()
-# #    lcd.write_string("abcdefghijklmnopqrstuvwxyz1234567890")
-# #    time.sleep(1) 
-# lcd.return_home()
-# lcd.write_string("abcdefghijklmnopqrstuvwxyz1234567890")
-# time.sleep(5) 
+lcd.clear()
+lcd.return_home();
+lcd.shift_text(False, True)  
+time.sleep(1)
+lcd.shift_text(False, True)  
+time.sleep(1)
+lcd.shift_text(False, True) 
+time.sleep(1)
+lcd.shift_text(False, False)
+time.sleep(1)
+str1 = "back and forth"
+for c in str1:
+   lcd.write_string(c)   
+   time.sleep(1)
+for x in xrange(1,40):
+   lcd.shift_text(True, False)
+   time.sleep(0.5)
+lcd.shift_text(True, True)
+time.sleep(3) 
 
-# lcd.set_shift_display(False, True)
+lcd.set_shift_text(False, True)
 
 lcd.clear()
 lcd.return_home()
