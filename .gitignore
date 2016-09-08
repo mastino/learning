@@ -3,3 +3,7 @@ grove_examples/
 
 # Executables and similar
 *.pyc
+*.out
+
+# Other
+*.h264
