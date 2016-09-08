@@ -1,0 +1,44 @@
+ 
+2016-09-08 19:42:18,768 - pmd - INFO - ----------------------------------------
+2016-09-08 19:42:18,769 - pmd - INFO - pmd v1-spike has been started
+2016-09-08 19:42:18,769 - pmd - INFO - ----------------------------------------
+2016-09-08 19:42:18,769 - pmd - INFO - Video capture filepath: ../picamera-python
+2016-09-08 19:42:18,770 - pmd - INFO - Capture videos with 1296 x 730 resolution
+2016-09-08 19:42:18,770 - pmd - INFO - Analyse motion vectors from a 640 x 480 resolution split
+2016-09-08 19:42:18,770 - pmd - INFO -   resulting in 41 x 30 motion blocks
+2016-09-08 19:42:18,771 - pmd - INFO - Analyse motion vectors threshold , sensitivity: 6 , 4
+2016-09-08 19:42:18,771 - pmd - INFO - Framerate: 45 fps
+2016-09-08 19:42:18,771 - pmd - INFO - video_intra_period: 5
+2016-09-08 19:42:18,771 - pmd - INFO - Rotation: 180 degrees
+2016-09-08 19:42:18,772 - pmd - INFO - Stabilization: False
+2016-09-08 19:42:18,772 - pmd - INFO - Annotate background: False
+2016-09-08 19:42:18,772 - pmd - INFO - Annotate frame_num: False
+2016-09-08 19:42:18,772 - pmd - INFO - Video detection event capture before-seconds , after-seconds: 2 , 2
+2016-09-08 19:42:18,773 - pmd - INFO - motion_event_wait_timeout: 300
+2016-09-08 19:42:18,773 - pmd - INFO - perform_snapshot_capture: False
+2016-09-08 19:42:18,773 - pmd - INFO - snapshot_capture_filename: snapshot
+2016-09-08 19:42:18,773 - pmd - INFO - logger_filename: ../picamera-python/pmd.log
+2016-09-08 19:42:18,774 - pmd - INFO - Histo_frame motion threshold bins: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 30, 40, 50, 100]
+2016-09-08 19:42:18,774 - pmd - INFO - Logging Level: 10 (info=20, debug=10)
+2016-09-08 19:42:18,774 - pmd - INFO - Dump extra motion histo info: False
+2016-09-08 19:42:21,405 - pmd - INFO - OK. Commence waiting for first REAL motion to be detected
+2016-09-08 19:42:21,406 - pmd - INFO - Entering event wait state awaiting next motion detection by class MyMotionDetector ...
+2016-09-08 19:42:21,407 - pmd - DEBUG - (also, window capture status was reset prior to waiting for motion event)
+2016-09-08 19:42:46,182 - pmd - DEBUG - Second consecutive frame motion detected - capture time window set.
+2016-09-08 19:42:46,199 - pmd - INFO - Detected motion
+2016-09-08 19:42:46,204 - pmd - INFO - Histo frame 1: [1222    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+    8]
+2016-09-08 19:42:46,208 - pmd - INFO - Histo frame 2: [1209    0    0    0    0    0    0    0    0    0    1    0    3    2    6
+    9]
+2016-09-08 19:42:46,209 - pmd - DEBUG - splitting video from circular IO buffer to after-motion-detected h264 file 
+2016-09-08 19:42:46,214 - pmd - DEBUG - started  saving before-motion circular buffer
+2016-09-08 19:42:46,271 - pmd - DEBUG - finished saving before-motion circular IO buffer
+2016-09-08 19:42:46,272 - pmd - DEBUG - start waiting to detect end of motion
+2016-09-08 19:42:48,820 - pmd - DEBUG - Capture time window cleared
+2016-09-08 19:42:49,274 - pmd - INFO - Detected end of motion
+2016-09-08 19:42:49,275 - pmd - DEBUG - splitting video back into the circular IO buffer
+2016-09-08 19:42:49,278 - pmd - DEBUG - starting new video post-processing thread 1 for h264 files
+2016-09-08 19:42:49,279 - pmd - DEBUG - cat ../picamera-python/20160908-194246-before.h264 ../picamera-python/20160908-194246-after.h264 > ../picamera-python/20160908-194246.h264 && rm -f ../picamera-python/20160908-194246-before.h264 && rm -f ../picamera-python/20160908-194246-after.h264
+2016-09-08 19:42:49,280 - pmd - INFO - Finished motion capture processing after detecting end-of-motion.
+2016-09-08 19:42:49,286 - pmd - INFO - Entering event wait state awaiting next motion detection by class MyMotionDetector ...
+2016-09-08 19:42:49,288 - pmd - DEBUG - (also, window capture status was reset prior to waiting for motion event)
